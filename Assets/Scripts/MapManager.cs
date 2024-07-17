@@ -13,7 +13,7 @@ public class MapManager : Singleton<MapManager> {
     
     
     
-    void LoadBuildings() {
+    void LoadBuildings() {  
 
         foreach (Building building in _buildings) {
             Destroy(building.gameObject);
@@ -30,10 +30,21 @@ public class MapManager : Singleton<MapManager> {
             _buildings.Add( Instantiate(data.gameObject, buildingPos, Quaternion.identity).GetComponent<Building>() );
         }
     }
-    
-    
-    
-    void Awake() {
+
+    void EnterMapping() {
         
+        
+    }
+
+    void EndMapping() {
+        
+        
+    }
+    
+    
+    
+    void Update() {
+        
+//        if ()
     }
 }
