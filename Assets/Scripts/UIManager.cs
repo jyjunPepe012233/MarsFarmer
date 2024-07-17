@@ -11,6 +11,9 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField]
     private GameObject _mappingUI;
+
+    [SerializeField]
+    private GameObject _marketUI;
     
     [SerializeField]
     private TextMeshProUGUI _userNameText;
@@ -30,7 +33,7 @@ public class UIManager : Singleton<UIManager>
     {
         _homeUI.SetActive(true);
         _mappingUI.SetActive(false);
-        
+        _marketUI.SetActive(false);
     }
     
     public void UserStatusUpdate()
@@ -75,6 +78,15 @@ public class UIManager : Singleton<UIManager>
     public void OnClickMarket()
     {
         Debug.Log("Market Click");
+        _homeUI.SetActive(false);
+        _marketUI.SetActive(true);
+    }
+
+    public void ExitMarket()
+    {
+        Debug.Log("Exit Market Click");
+        _homeUI.SetActive(true);
+        _marketUI.SetActive(false);
     }
 
     public void OnClickWorkerGotcha()
@@ -96,5 +108,19 @@ public class UIManager : Singleton<UIManager>
     {
         Debug.Log("Setting Click");
     }
-    
+
+    public void OnClickBuyJoin()
+    {
+        Debug.Log("Buy Join Click");
+    }
+
+    public void OnClickSellJoin()
+    {
+        Debug.Log("Sell Join Click");
+    }
+
+    public void OnClickGotcha()
+    {
+        Debug.Log("Gotcha Join Click");
+    }
 }

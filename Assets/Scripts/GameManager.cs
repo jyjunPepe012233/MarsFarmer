@@ -34,17 +34,19 @@ public class GameManager : Singleton<GameManager>
         }
         
         _saveData = DataManager.Instance.LoadJson<JsonData>();
-        UIUpdate();
-        GetSleepTime();
+        try
+        {
+            UIUpdate();
+            GetSleepTime();
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 
     private void GetSleepTime()
     {
-        if (_saveData.BuildingInfos == null)
-        {
-            return;
-        }
-
         for (int i = 0; i < _saveData.BuildingInfos.Count; i++)
         {
             DateTime lastGetTime =
@@ -55,7 +57,7 @@ public class GameManager : Singleton<GameManager>
 
     private void UIUpdate()
     {
-        if (_saveData.UserName == null)
+        if (_saveData.UserName == "")
         {
             return;
         }
