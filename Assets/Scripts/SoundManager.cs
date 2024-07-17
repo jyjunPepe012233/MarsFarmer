@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -10,7 +11,10 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     public int thisFiled;
-    
+    [Header("#MasterVolume")] 
+    [Range(0f,1f)]
+    public float MasterVolume;
+     
     [Header("#BGM")]
     public AudioClip[] bgmClips;
     public float bgmVolume;
@@ -43,7 +47,7 @@ public class SoundManager : MonoBehaviour
         bgmPlayer = bgmObject.AddComponent <AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.volume = bgmVolume*MasterVolume;
         bgmPlayer.clip = bgmClips[thisFiled];
 
         
@@ -53,7 +57,7 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < clickChannel; i++)
         {
             clickPlayers[i] = clickObject.AddComponent<AudioSource>();
-            clickPlayers[i].volume = clickVolume;
+            clickPlayers[i].volume = clickVolume*MasterVolume;
             clickPlayers[i].playOnAwake = false;
             clickPlayers[i].loop = false;
         }
@@ -65,7 +69,7 @@ public class SoundManager : MonoBehaviour
         {
             getPlayers[i] = getObject.AddComponent<AudioSource>();
             getPlayers[i].loop = false;
-            getPlayers[i].volume = getVolume;
+            getPlayers[i].volume = getVolume*MasterVolume;
             getPlayers[i].playOnAwake = false;
         }
     }
@@ -138,4 +142,5 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.Play();
         
     }
+    
 }
