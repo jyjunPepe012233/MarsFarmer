@@ -75,7 +75,7 @@ public class MapManager : Singleton<MapManager> {
         
         placingSign.SetActive(true);
 
-        placingSign.GetComponent<RectTransform>().position = 
+        placingSign.GetComponent<RectTransform>().position =
             CameraManager.Instance.camData.WorldToScreenPoint(placingObject.transform.position);
 
         Touch touch = Input.GetTouch(0);

@@ -18,7 +18,7 @@ public class CameraManager : Singleton<CameraManager> {
 	[Space(10)]
 	[SerializeField] private float _zoomSpeed;
 	[SerializeField] private Vector2 _distanceClamp;
-
+	
 	[Space(5)]
 	[SerializeField, Range(0, 1)] private float _distanceIndex;
 
