@@ -1,15 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    private string _userName;
-    private int userLevel;
+    [SerializeField]
+    private GameObject _homeUI;
+    
+    [SerializeField]
+    private TextMeshProUGUI _userNameText;
+    [SerializeField]
+    private TextMeshProUGUI _userLevelText;
+    [SerializeField]
+    private TextMeshProUGUI _dollarsText;
+    [SerializeField]
+    private TextMeshProUGUI _rubysText;
     
     protected override void Init()
     {
         
+    }
+
+    public void UserStatusUpdate()
+    {
+        _userNameText.text = GameManager.Instance.SaveData.UserName;
+        _userLevelText.text = GameManager.Instance.SaveData.UserLevel.ToString();
+        _dollarsText.text = GameManager.Instance.SaveData.Dollars.ToString() + " $";
+        _rubysText.text = GameManager.Instance.SaveData.Rubys.ToString();
     }
 
     public void OnClickBuilding()
@@ -20,6 +38,14 @@ public class UIManager : Singleton<UIManager>
     public void OnClickMapping()
     {
         Debug.Log("Mapping Click");
+        _homeUI.SetActive(false);
+        MapManager.Instance.EnterMapping();
+    }
+
+    public void ExitMapping()
+    {
+        Debug.Log("Mapping Exit");
+        _homeUI.SetActive(true);
     }
 
     public void OnClickProductList()

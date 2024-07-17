@@ -14,7 +14,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private BuildingStatus buildingStatus;
     public BuildingsID buildingsID;
 
-    public List<ItemStatus.ItemStat> ItemStatus {
+    public List<ItemStatus.ItemStat> ItemStatus
+    {
         get => itemStatus.itemStatus;
     }
 
@@ -33,6 +34,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         _saveData = DataManager.Instance.LoadJson<JsonData>();
+        UIManager.Instance.UserStatusUpdate();
         GetSleepTime();
     }
 
