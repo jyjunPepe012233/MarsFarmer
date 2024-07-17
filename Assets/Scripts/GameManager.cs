@@ -1,18 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    private JsonData _saveData;
+    private bool _sleepTimeFlag = false;
+    private bool _saveLoadFlag = false;
+    
+    
+    public int sleepTime;
+    
+    protected override void Init()
     {
+        if (!File.Exists(Application.dataPath + "/SaveData.json"))
+        {
+            DataManager.Instance.GetEditJson(new JsonData());
+        }
+        
+        _saveData = DataManager.Instance.LoadJson<JsonData>();
+        GetSleepTime();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GetSleepTime()
     {
+        if (_saveData.BuildingInfos == null)
+        {
+            return;
+        }
         
+        for (int i = 0; i < _saveData.BuildingInfos.Count; i++)
+        {
+            DateTime lastGetTime =
+                DateTime.ParseExact(_saveData.BuildingInfos[i].LastGetTime, "yyyy-MM-dd hh:mm:ss:tt", null);
+            _saveData.BuildingInfos[i].SleepTime = (int)(lastGetTime - DateTime.Now).TotalSeconds;
+        }
+        
+    }
+
+    
+    public JsonData SaveData
+    {
+        get { return _saveData; }
+        set { _saveData = value; }
     }
 }

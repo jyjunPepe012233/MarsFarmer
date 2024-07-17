@@ -5,13 +5,33 @@ public class BuildingInfo
 {
     private int[] _pos;
     private string _building;
-    
-    public BuildingInfo() { }
+    private string _lastGetTime;
+    private int _sleepTime;
 
-    public BuildingInfo(int[] pos, string building)
+    public enum Product
+    {
+        rices,
+        corns,
+        potatoes
+    }
+
+    private Product _items;
+    
+    public BuildingInfo() {  }
+
+    public BuildingInfo(int[] pos, string building, string lastGetTime)
     {
         _pos = pos;
         _building = building;
+        _lastGetTime = lastGetTime;
+    }
+
+    public BuildingInfo(int[] pos, string building, string lastGetTime, Product items)
+    {
+        _pos = pos;
+        _building = building;
+        _lastGetTime = lastGetTime;
+        _items = items;
     }
 
     public int[] Pos
@@ -24,6 +44,24 @@ public class BuildingInfo
     {
         get { return _building; }
         set { _building = value; }
+    }
+
+    public string LastGetTime
+    {
+        get { return _lastGetTime; }
+        set { _lastGetTime = value; }
+    }
+
+    public int SleepTime
+    {
+        get { return _sleepTime; }
+        set { _sleepTime = value; }
+    }
+    
+    public Product Items
+    {
+        get { return _items; }
+        set { _items = value; }
     }
 }
 
@@ -44,10 +82,12 @@ public class JsonData
     private int _corns;
     private int _potatoes;
 
+    private string _lastPlayTime;
+
     public JsonData() { }
 
     public JsonData(string userName, int userLevel, float dollars,  List<BuildingInfo> buildingInfos, string[] workers, float oxygen,
-        float water, float electricity, int rices, int corns, int potatoes)
+        float water, float electricity, int rices, int corns, int potatoes, string lastPlayTime)
     {
         _userName = userName;
         _userLevel = userLevel;
@@ -60,6 +100,7 @@ public class JsonData
         _rices = rices;
         _corns = corns;
         _potatoes = potatoes;
+        _lastPlayTime = lastPlayTime;
     }
 
     public string UserName
@@ -127,5 +168,10 @@ public class JsonData
         get { return _potatoes; }
         set { _potatoes = value; }
     }
-    
+
+    public string LastPlayTime
+    {
+        get { return _lastPlayTime; }
+        set { _lastPlayTime = value; }
+    }
 }
