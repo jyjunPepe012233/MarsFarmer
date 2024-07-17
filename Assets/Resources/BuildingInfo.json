@@ -2,49 +2,73 @@
   "factory" : {
     "물 생산소" : {
       "size" : [1, 1],
-      "item" : "water"
+      "item" : "water",
+      "price": 12000,
+      "bulidTime" : 10
     },
     "산소 생산소" : {
       "size" : [1, 1],
-      "item" : "oxygen"
+      "item" : "oxygen",
+      "price" : 12000,
+      "buildTime" : 10
     },
     "발전기" : {
       "size" : [1, 1],
-      "item" : "electricity"
+      "item" : "electricity",
+      "price" : 15000,
+      "buildTime" : 60
     },
     "밭" : {
       "size" : [2, 2],
-      "item" : ["rices", "corns", "potatoes"]
+      "item" : ["rices", "corns", "potatoes"],
+      "price" : 15000,
+      "buildTime" : 50
     },
     "바이오에탄올 공장" : {
       "size" : [3, 3],
-      "item" : "bioethanol"
+      "item" : "bioethanol",
+      "price" : 120000,
+      "buildTime" : 1440
     }
   },
   "reservoir" : {
     "물탱크" : {
       "size" : [1, 1],
-      "item" : "water"
+      "item" : "water",
+      "price" : 8000,
+      "buildTime" : 5
     },
     "산소저장고" : {
       "size" : [1, 1],
-      "item" : "oxygen"
+      "item" : "oxygen",
+      "price" : 8000,
+      "buildTime" : 5
     },
     "곡물창고" : {
       "size" : [2, 2],
-      "item" : ["rices", "corns", "potatoes"]
+      "item" : ["rices", "corns", "potatoes"],
+      "price" : 30000,
+      "buildTime" : 120
     },
     "기름창고" : {
       "size" : [2, 2],
-      "item" : "bioethanol"
+      "item" : "bioethanol",
+      "price" : 90000,
+      "buildTime" : 720
     }
   },
   "etc" : {
     "시장" : {
-      "size" : [3, 3]
+      "size" : [3, 3],
+      "item" : null,
+      "price" : 0,
+      "buildTime" : 1
     },
     "주거단지" : {
-      "size" : [3, 2]
+      "size" : [3, 2],
+      "item": null,
+      "price" : 0,
+      "buildTime" : 0
     }
   }
 }
