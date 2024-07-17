@@ -41,6 +41,8 @@ public class CameraManager : Singleton<CameraManager> {
 		
 		_cam.rotation = _camArm.rotation;
 
+		camData = _cam.GetComponent<Camera>();
+
 	}
 	
 
