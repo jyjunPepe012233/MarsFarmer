@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public abstract class Building : MonoBehaviour {
@@ -29,18 +30,10 @@ public abstract class Building : MonoBehaviour {
 
 
     
-    void FixedUpdate() {
-        if (!MapManager.Instance.isCantPlace) MapManager.Instance.isCantPlace = isCantPlace;
-        isCantPlace = false;
+    void Update() {
     }
 
     public abstract void SetupBuilding();
 
     public abstract void Select();
-
-    
-    
-    private void OnTriggerStay(Collider other) {
-        isCantPlace = true;
-    }
 }

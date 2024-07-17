@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,26 @@ public class Factory : Building {
     [Space(10f)]
     [SerializeField] private ResourceType _resourceType;
 
+    [SerializeField] private GameObject curPopUp;
 
+    private float collectTemp;
+
+
+    void Update() {
+
+        if (holdResourceAmount > 0) {
+            
+            if (curPopUp == null)
+                curPopUp = Instantiate( GameManager.Instance.ItemStatus[(int)_resourceType].popUp,
+                                        UIManager.Instance.popUpParent );
+
+            curPopUp.GetComponent<RectTransform>().position =
+                CameraManager.Instance.camData.WorldToScreenPoint(transform.position) + new Vector3(0, 0, 200);
+        }
+
+        Collect();
+
+    }
 
     public override void SetupBuilding() {
 
@@ -34,7 +54,9 @@ public class Factory : Building {
     
     public override void Select() {
 
-        if (holdResourceAmount > 0) UIManager.Instance.OnClickBuilding();
+        if (holdResourceAmount > 0) {
+            GetResource();
+        }
     }
     
 
@@ -49,9 +71,14 @@ public class Factory : Building {
         }
     }
 
-    private void ColletBySleepTime(int sleepTime) {
+    private void Collect() {
 
-        holdResourceAmount = (int)collectPerHour * sleepTime;
+        collectTemp += Time.deltaTime * (collectPerHour / 60 / 60);
+        if (collectTemp >= 1) {
+            collectTemp = 0;
+            holdResourceAmount += 1;
+        }
+        
     }
 
 
@@ -61,21 +88,32 @@ public class Factory : Building {
             
             case (ResourceType.Rices):
                 GameManager.Instance.SaveData.Rices += holdResourceAmount;
-                Debug.Log(GameManager.Instance.SaveData.Rices);
+                holdResourceAmount = 0;
+                Destroy(curPopUp);
+                curPopUp = null;
                 break;
             
             case (ResourceType.Corns):
                 GameManager.Instance.SaveData.Corns += holdResourceAmount;
+                holdResourceAmount = 0;
+                Destroy(curPopUp);
+                curPopUp = null;
                 break;
             
             case (ResourceType.Potatoes):
                 GameManager.Instance.SaveData.Potatoes += holdResourceAmount;
+                holdResourceAmount = 0;
+                Destroy(curPopUp);
+                curPopUp = null;
+                break;
+            
+            case (ResourceType.BioEthanol):
+                GameManager.Instance.SaveData.Potatoes += holdResourceAmount;
+                holdResourceAmount = 0;
+                Destroy(curPopUp);
+                curPopUp = null;
                 break;
         }
     }
-    
-//    private void OnTriggerEnter(Collider other) {
-//        isCantPlace = true;
-//    }
     
 }

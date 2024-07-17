@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    public Canvas _canvas;
+    public Transform popUpParent;
     
     [SerializeField]
     private GameObject _homeUI;

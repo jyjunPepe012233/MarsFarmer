@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public struct Vector222 {
+    public Vector3 minPos;
+    public Vector3 maxPos;
+
+    public Vector222(Vector3 minPos, Vector3 maxPos) {
+        this.minPos = minPos;
+        this.maxPos = maxPos;
+    }
+}
+
+
 public class MapManager : Singleton<MapManager> {
 
     private List<BuildingInfo> _buildingInfos; // 세이브에서 Load 필요
@@ -24,26 +35,10 @@ public class MapManager : Singleton<MapManager> {
         get => placingObject;
         set => placingObject = value;
     }
+
+    public List<Vector222> usedGrid = new List<Vector222>();
     
     
-    
-    void LoadBuildings() {  
-
-        foreach (Building building in _buildings) {
-            Destroy(building.gameObject);
-        }
-
-        // 세이브에서 Load
-
-        foreach (BuildingInfo info in _buildingInfos) {
-            
-            var data = buildingsIdData.GetPrefab(info.Building) .GetComponent<Building>(); ;
-
-            var buildingPos = new Vector3(data.Size.x / 2, 0, data.Size.y / 2);
-            buildingPos += new Vector3(info.Pos[0] - 0.5f, 0, info.Pos[1] - 0.5f);
-            _buildings.Add( Instantiate(data.gameObject, buildingPos, Quaternion.identity).GetComponent<Building>() );
-        }
-    }
 
     public void EnterMapping() {
 
@@ -74,9 +69,7 @@ public class MapManager : Singleton<MapManager> {
         if (isMapping) Mapping();
 
         isCantPlace = false;
-    }
-
-    void Update() {
+        usedGrid.Clear();
     }
 
 
@@ -84,7 +77,7 @@ public class MapManager : Singleton<MapManager> {
 
         if (placingObject == null) return;
         
-        placingSign.SetActive(!isCantPlace);
+        placingSign.SetActive(true);
 
         
         if (oldBuildingPos == null) oldBuildingPos = placingObject.transform.position;

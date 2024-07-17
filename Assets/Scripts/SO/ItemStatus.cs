@@ -12,6 +12,8 @@ public class ItemStatus : ScriptableObject {
 		[Space(5)]
 		public float collectAmountHour;
 		public int sellPrice;
+		[Space(5)]
+		public GameObject popUp;
 	}
 	public List<ItemStat> itemStatus;
 }
