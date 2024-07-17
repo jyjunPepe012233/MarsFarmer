@@ -68,41 +68,41 @@ public class Market : Singleton<Market>
         seeds = new Product[seedKind];
     }
 
-    public void BuyBuilding(int buyBuilding,int BuildingQuntity)
+    public void BuyBuilding(int buyBuilding)
     {
-        if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buyBuilding]*BuildingQuntity)
+        if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buyBuilding])
         {
             UIManager.Instance.OverDollar();
         }
         else
         {
             GameManager.Instance.SaveData.Dollars =
-                GameManager.Instance.SaveData.Dollars - GrainSellPrice[buyBuilding] * BuildingQuntity;
+                GameManager.Instance.SaveData.Dollars - GrainSellPrice[buyBuilding];
             SoundManager.instance.getSound(2);
         }
     }
     
-    void BuySeed(int buyBuilding,int BuildingQuntity)
+    public void BuySeed(int buySeed)
     {
-        if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buyBuilding]*BuildingQuntity)
+        if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buySeed])
         {
             UIManager.Instance.OverDollar();
         }
         else
         {
             GameManager.Instance.SaveData.Dollars =
-                GameManager.Instance.SaveData.Dollars - GrainSellPrice[buyBuilding] * BuildingQuntity;
-            SoundManager.instance.getSound(2);
+                GameManager.Instance.SaveData.Dollars - GrainSellPrice[buySeed];
+            SoundManager.instance.getSound(0);
         }
     }
 
-    void sellGrain(int sellGrain, int grainQuntity)
+    public void sellGrain(int sellGrain, int grainQuntity)
     {
         GameManager.Instance.SaveData.Dollars += GrainSellPrice[sellGrain] * grainQuntity;
         SoundManager.instance.getSound(7);
     }
 
-    (string,Sprite,int)[] getBuildings()
+    public (string,Sprite,int)[] getBuildings()
     {
         var returnList = new (string, Sprite, int)[BuildingKind];
         for (int i=0; i < Buildings.Length;i++)
@@ -114,7 +114,7 @@ public class Market : Singleton<Market>
         return returnList;
     }
 
-    (string, Sprite, int)[] getSeeds()
+    public (string, Sprite, int)[] getSeeds()
     {
         var returnList = new (string, Sprite, int)[seedKind];
         for (int i=0; i < seeds.Length;i++)
@@ -210,17 +210,17 @@ public class Market : Singleton<Market>
             };
         
         
-    private int SlavePick(Slave[] slaves)
+    public int SlavePick(Slave[] slaves)
     {
         return randint(0,slaves.Length);
     }
         
-    private int randint(int min, int max)
+    public int randint(int min, int max)
     {
         return Random.Range(min,max);
     }
 
-    private Slave gadCha()
+    public Slave gadCha()
     {
         var cha = randint(1, 1000);
         if (cha >= 600) //C등급
