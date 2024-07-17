@@ -9,8 +9,20 @@ public class GameManager : Singleton<GameManager>
     private JsonData _saveData;
     private bool _sleepTimeFlag = false;
     private bool _saveLoadFlag = false;
-    
-    
+
+    private ItemStatus itemStatus;
+    private BuildingStatus buildingStatus;
+    public BuildingsID buildingsID;
+
+    public List<ItemStatus.ItemStat> ItemStatus {
+        get => itemStatus.itemStatus;
+    }
+
+    public List<BuildingStatus.BuildingStat> BuildingStatus {
+        get => buildingStatus.buildingStats;
+    }
+
+
     public int sleepTime;
     
     protected override void Init()
@@ -22,7 +34,6 @@ public class GameManager : Singleton<GameManager>
         
         _saveData = DataManager.Instance.LoadJson<JsonData>();
         GetSleepTime();
-        
     }
 
     private void GetSleepTime()
@@ -47,4 +58,6 @@ public class GameManager : Singleton<GameManager>
         get { return _saveData; }
         set { _saveData = value; }
     }
+    
+    
 }

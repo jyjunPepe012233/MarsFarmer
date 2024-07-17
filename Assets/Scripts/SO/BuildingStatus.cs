@@ -18,4 +18,5 @@ public class BuildingStatus : ScriptableObject {
 		public List<ResourceType> itemTypes;
 	}
 	public List<BuildingStat> buildingStats;
+	
 }
