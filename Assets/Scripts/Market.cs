@@ -67,21 +67,25 @@ public class Market : MonoBehaviour
         seeds = new Product[seedKind];
     }
 
-    int BuyBuilding(int buyBuilding,int BuildingQuntity)
+    void BuyBuilding(int buyBuilding,int BuildingQuntity)
     {
-        if (GameManager.Instance.SaveData.Dollars > GrainSellPrice[buyBuilding]*BuildingQuntity)
+        if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buyBuilding]*BuildingQuntity)
         {
-            return 0;
+            UIManager.Instance.OverDollar();
         }
         else
         {
-            return BuildingBuyPrice[buyBuilding] * BuildingQuntity - GameManager.Instance.SaveData.Dollars;
+            GameManager.Instance.SaveData.Dollars =
+                GameManager.Instance.SaveData.Dollars - GrainSellPrice[buyBuilding] * BuildingQuntity;
+            SoundManager.instance.getSound(2);
         }
     }
 
-    int sellGrain(int sellGrain, int grainQuntity)
+    void sellGrain(int sellGrain, int grainQuntity)
     {
-        return GameManager.Instance.SaveData.Dollars + GrainSellPrice[sellGrain] * grainQuntity;
+        
+        GameManager.Instance.SaveData.Dollars += GrainSellPrice[sellGrain] * grainQuntity;
+        SoundManager.instance.getSound(7);
     }
 
     (string,Sprite,int)[] getBuildings()

@@ -36,7 +36,11 @@ public class SoundManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        if (SoundManager.instance == null)
+        {
+            SoundManager.instance = this;
+        }
+
         Init();
     }
 
