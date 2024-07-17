@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Market : MonoBehaviour
 {
@@ -83,7 +84,6 @@ public class Market : MonoBehaviour
 
     void sellGrain(int sellGrain, int grainQuntity)
     {
-        
         GameManager.Instance.SaveData.Dollars += GrainSellPrice[sellGrain] * grainQuntity;
         SoundManager.instance.getSound(7);
     }
@@ -113,17 +113,24 @@ public class Market : MonoBehaviour
     }
     
     
-    //==================================================================
+    //================================================================== 갓☆챠
     
     private class Slave
     {
         private string name;
         private int tier;
+        private Sprite slaveImage;
         private float skills;
         private int gender;
         private int color;
         private string Description;
 
+        public Slave(string N, int T)
+        {
+            name = N;
+            tier = T;
+        }
+        
         public Slave(string N,int T, float S, int G, int C, string D)
         {
             name = N;
@@ -134,10 +141,93 @@ public class Market : MonoBehaviour
             Description = D;
         }
 
-        // Vector4 getStatus()
-        // {
-        //     
-        // }
+        private new Slave[] CTierSlaves = 
+            new Slave[]
+            {
+                new Slave("뽀삐",1),
+                new Slave("민준", 1),
+                new Slave("서연", 1),
+                new Slave("지훈", 1),
+                new Slave("지우", 1),
+                new Slave("하준", 1),
+                new Slave("은채", 1),
+                new Slave("유진", 1),
+                new Slave("호준", 1),
+                new Slave("나연", 1),
+                new Slave("수빈", 1)
+            };
+        private new Slave[] BTierSlaves = 
+            new Slave[]
+            {
+                new Slave("하진", 2),
+                new Slave("지수", 2),
+                new Slave("진우", 2),
+                new Slave("소연", 2),
+                new Slave("현정", 2),
+                new Slave("태현", 2),
+                new Slave("민서", 2),
+                new Slave("우진", 2),
+                new Slave("아영", 2),
+                new Slave("준호", 2)
+            };
+        private new Slave[] ATierSlaves = 
+            new Slave[]
+            {
+                new Slave("유리", 3),
+                new Slave("정우", 3),
+                new Slave("하늘", 3),
+                new Slave("세영", 3),
+                new Slave("지훈", 3),
+                new Slave("민규", 3),
+                new Slave("수연", 3),
+                new Slave("건우", 3),
+                new Slave("지안", 3),
+                new Slave("효진", 3)
+            };
+        private new Slave[] STierSlaves = 
+            new Slave[]
+            {
+                new Slave("춘자", 4),
+                new Slave("춘식", 4),
+                new Slave("영희", 4),
+                new Slave("광자", 4),
+                new Slave("루피", 4),
+                new Slave("철수", 4)
+            };
+        
+        
+    private int SlavePick(Slave[] slaves)
+    {
+        return randint(0,slaves.Length);
+    }
+        
+    private int randint(int min, int max)
+    {
+        return Random.Range(min,max);
+    }
+
+    private Slave gadCha()
+    {
+        var cha = randint(1, 1000);
+        if (cha >= 600) //C등급
+        {
+            return CTierSlaves[SlavePick(CTierSlaves)];
+        }
+        else if (cha >= 900) //B등급
+        {
+            return BTierSlaves[SlavePick(BTierSlaves)];
+        }
+        else if (cha >= 1000) //A등급
+        {
+            return ATierSlaves[SlavePick(ATierSlaves)];
+        }
+        else //S 등급
+        {
+            return STierSlaves[SlavePick(STierSlaves)];
+        }
+        
+        }
+
     }
     
     
