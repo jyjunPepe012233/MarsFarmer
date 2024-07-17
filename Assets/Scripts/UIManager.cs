@@ -14,6 +14,15 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField]
     private GameObject _marketUI;
+
+    [SerializeField]
+    private GameObject _marketFirstUI;
+
+    [SerializeField]
+    private GameObject _marketBuyUI;
+
+    [SerializeField]
+    private GameObject _realBuyPopUp;
     
     [SerializeField]
     private TextMeshProUGUI _userNameText;
@@ -34,6 +43,9 @@ public class UIManager : Singleton<UIManager>
         _homeUI.SetActive(true);
         _mappingUI.SetActive(false);
         _marketUI.SetActive(false);
+        _marketFirstUI.SetActive(false);
+        _marketBuyUI.SetActive(false);
+        _realBuyPopUp.SetActive(false);
     }
     
     public void UserStatusUpdate()
@@ -80,6 +92,7 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("Market Click");
         _homeUI.SetActive(false);
         _marketUI.SetActive(true);
+        _marketFirstUI.SetActive(true);
     }
 
     public void ExitMarket()
@@ -112,6 +125,15 @@ public class UIManager : Singleton<UIManager>
     public void OnClickBuyJoin()
     {
         Debug.Log("Buy Join Click");
+        _marketFirstUI.SetActive(false);
+        _marketBuyUI.SetActive(true);
+    }
+
+    public void ExitMarketJoin()
+    {
+        Debug.Log("Exit Click");
+        _marketFirstUI.SetActive(true);
+        _marketBuyUI.SetActive(false);
     }
 
     public void OnClickSellJoin()
@@ -127,5 +149,30 @@ public class UIManager : Singleton<UIManager>
     public void OverDollar()
     {
         Debug.Log("Dollar Over");
+    }
+
+    public void OnBuyRice()
+    {
+        _realBuyPopUp.SetActive(true);
+    }
+    
+    public void OnBuyCorn()
+    {
+        _realBuyPopUp.SetActive(true);
+    }
+    
+    public void OnBuyPotato()
+    {
+        _realBuyPopUp.SetActive(true);
+    }
+
+    public void OnBuyCancel()
+    {
+        _realBuyPopUp.SetActive(false);
+    }
+
+    public void OnBuy()
+    {
+        _realBuyPopUp.SetActive(false);
     }
 }

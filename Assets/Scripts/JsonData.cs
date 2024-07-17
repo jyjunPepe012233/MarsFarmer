@@ -83,12 +83,16 @@ public class JsonData
     private int _corns;
     private int _potatoes;
 
+    private bool _isUnlockRice;
+    private bool _isUnlockCorn;
+    private bool _isdUnlockPotatoes;
+
     private string _lastPlayTime;
 
     public JsonData() { }
 
     public JsonData(string userName, int userLevel, int dollars, int rubys,  List<BuildingInfo> buildingInfos, string[] workers, float oxygen,
-        float water, float electricity, int rices, int corns, int potatoes, string lastPlayTime)
+        float water, float electricity, int rices, int corns, int potatoes, bool isUnlockRice, bool isUnlockCorn, bool isdUnlockPotatoes, string lastPlayTime)
     {
         _userName = userName;
         _userLevel = userLevel;
@@ -102,6 +106,9 @@ public class JsonData
         _rices = rices;
         _corns = corns;
         _potatoes = potatoes;
+        _isUnlockRice = isUnlockRice;
+        _isUnlockCorn = isUnlockCorn;
+        _isdUnlockPotatoes = isdUnlockPotatoes;
         _lastPlayTime = lastPlayTime;
     }
 
