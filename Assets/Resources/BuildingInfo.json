@@ -1,0 +1,50 @@
+{
+  "factory" : {
+    "물 생산소" : {
+      "size" : [1, 1],
+      "item" : "water"
+    },
+    "산소 생산소" : {
+      "size" : [1, 1],
+      "item" : "oxygen"
+    },
+    "발전기" : {
+      "size" : [1, 1],
+      "item" : "electricity"
+    },
+    "밭" : {
+      "size" : [2, 2],
+      "item" : ["rices", "corns", "potatoes"]
+    },
+    "바이오에탄올 공장" : {
+      "size" : [3, 3],
+      "item" : "bioethanol"
+    }
+  },
+  "reservoir" : {
+    "물탱크" : {
+      "size" : [1, 1],
+      "item" : "water"
+    },
+    "산소저장고" : {
+      "size" : [1, 1],
+      "item" : "oxygen"
+    },
+    "곡물창고" : {
+      "size" : [2, 2],
+      "item" : ["rices", "corns", "potatoes"]
+    },
+    "기름창고" : {
+      "size" : [2, 2],
+      "item" : "bioethanol"
+    }
+  },
+  "etc" : {
+    "시장" : {
+      "size" : [3, 3]
+    },
+    "주거단지" : {
+      "size" : [3, 2]
+    }
+  }
+}
