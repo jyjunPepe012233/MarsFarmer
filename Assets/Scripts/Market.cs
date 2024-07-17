@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Market : MonoBehaviour
+public class Market : Singleton<Market>
 {
     
     /*
@@ -39,7 +39,7 @@ public class Market : MonoBehaviour
         {
             name = N;
             itemImage = I;
-            type = T; // 자원 :1, 건뭉 :2, 종자 :3
+            type = T; // 자원 :1, 건물 :2, 종자 :3
             itemNumber = INo;
             buyPrice = BPr;
             sellPrice = Spr;
@@ -62,13 +62,27 @@ public class Market : MonoBehaviour
     
     //GameManager.Instance.SaveData.dollors
 
-    private void Awake()
+    protected override void Init()
     {
         Buildings = new Product[BuildingKind];
         seeds = new Product[seedKind];
     }
 
-    void BuyBuilding(int buyBuilding,int BuildingQuntity)
+    public void BuyBuilding(int buyBuilding,int BuildingQuntity)
+    {
+        if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buyBuilding]*BuildingQuntity)
+        {
+            UIManager.Instance.OverDollar();
+        }
+        else
+        {
+            GameManager.Instance.SaveData.Dollars =
+                GameManager.Instance.SaveData.Dollars - GrainSellPrice[buyBuilding] * BuildingQuntity;
+            SoundManager.instance.getSound(2);
+        }
+    }
+    
+    void BuySeed(int buyBuilding,int BuildingQuntity)
     {
         if (GameManager.Instance.SaveData.Dollars < GrainSellPrice[buyBuilding]*BuildingQuntity)
         {
