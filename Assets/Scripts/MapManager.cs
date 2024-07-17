@@ -15,6 +15,9 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField] private GameObject placingObject;
     [SerializeField] private GameObject placingSign;
 
+    public Vector3? oldBuildingPos;
+    public Vector3? newBuildingPos;
+
     public GameObject PlacingObject {
         get => placingObject;
         set => placingObject = value;
@@ -46,10 +49,11 @@ public class MapManager : Singleton<MapManager> {
 
     }
 
-    void EndMapping() {
+    public void EndMapping() {
 
         UIManager.Instance.ExitMapping();
         
+        EndChoice();
         isMapping = false;
     }
 
@@ -73,23 +77,54 @@ public class MapManager : Singleton<MapManager> {
 
         if (placingObject == null) return;
         
+        if (oldBuildingPos == null) oldBuildingPos = placingObject.transform.position;
+        
         placingSign.SetActive(true);
 
         placingSign.GetComponent<RectTransform>().position =
             CameraManager.Instance.camData.WorldToScreenPoint(placingObject.transform.position);
 
-        Touch touch = Input.GetTouch(0);
-        var Vector = CameraManager.Instance.camData.ScreenToWorldPoint(touch.position);
+        
+        
+        if (Input.touchCount == 1) {
+            
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase != TouchPhase.Moved) return;
+            
+            Ray ray = CameraManager.Instance.camData.ScreenPointToRay(touch.position);
+            if (Physics.Raycast(ray, out RaycastHit hitinfo, Mathf.Infinity, LayerMask.GetMask("Ground"))) {
+                
+                newBuildingPos = new Vector3((int)hitinfo.point.x, 0, (int)hitinfo.point.z);
+                
+                placingObject.transform.position = (Vector3)newBuildingPos;
+            }
+
+
+        }
+
     }
 
     public void ChoiceYes() {
-        
-        EndChoice();
+
+        newBuildingPos = null;
+        oldBuildingPos = null;
+
+        placingObject = null;
+        placingSign.SetActive(false);
+
+
     }
 
     public void EndChoice() {
 
+        newBuildingPos = null;
+        if (oldBuildingPos != null) {
+            placingObject.transform.position = (Vector3)oldBuildingPos;
+        } else placingObject.transform.position = Vector3.zero;
+        oldBuildingPos = null;
         placingObject = null;
+        
         placingSign.SetActive(false);
     }
 }
