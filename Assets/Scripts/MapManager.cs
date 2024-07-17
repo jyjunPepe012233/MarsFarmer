@@ -16,6 +16,7 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField] private GameObject placingSign;
 
     public GameObject PlacingObject {
+        get => placingObject;
         set => placingObject = value;
     }
     
@@ -51,10 +52,14 @@ public class MapManager : Singleton<MapManager> {
         
         isMapping = false;
     }
+
+
+    public void Awake() {
+        placingSign.SetActive(false);
+    }
     
     
-    
-    void Update() {
+    void LateUpdate() {
 
         if (isMapping && Input.GetKeyDown(KeyCode.Escape)) { // 뒤로가기
             EndMapping();
@@ -67,9 +72,14 @@ public class MapManager : Singleton<MapManager> {
     void Mapping() {
 
         if (placingObject == null) return;
+        
+        placingSign.SetActive(true);
 
-        var sign = Instantiate(placingSign);
-        sign.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(placingObject.transform.position);
+        placingSign.GetComponent<RectTransform>().position = 
+            CameraManager.Instance.camData.WorldToScreenPoint(placingObject.transform.position);
+
+        Touch touch = Input.GetTouch(0);
+        var Vector = CameraManager.Instance.camData.ScreenToWorldPoint(touch.position);
     }
 
     public void ChoiceYes() {
@@ -80,6 +90,6 @@ public class MapManager : Singleton<MapManager> {
     public void EndChoice() {
 
         placingObject = null;
-        Destroy(placingSign);
+        placingSign.SetActive(false);
     }
 }

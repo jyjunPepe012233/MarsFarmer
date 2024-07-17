@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour {
+public class CameraManager : Singleton<CameraManager> {
 
-	[SerializeField] private Transform _cam;
+	public Transform _cam;
 	[SerializeField] private Transform _camArm;
 	[SerializeField, Range(0, 90)] private float _camAngle;
 	
@@ -21,6 +21,8 @@ public class CameraManager : MonoBehaviour {
 
 	[Space(5)]
 	[SerializeField, Range(0, 1)] private float _distanceIndex;
+
+	public Camera camData;
 	
 	
 
@@ -44,6 +46,8 @@ public class CameraManager : MonoBehaviour {
 
 	void Update() {
 
+		if (MapManager.Instance.PlacingObject != null) return;
+		
 		if (Input.touchCount == 1) Move();
 		if (Input.touchCount == 2) ZoomInOut();
 		
