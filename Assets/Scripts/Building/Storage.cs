@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Storage : Building {
@@ -36,5 +37,7 @@ public class Storage : Building {
             storeInfos.Add(new StoreInfo(status.itemTypes[i], default));
         }
     }
+    
+    public override void Select() {}
 
 }

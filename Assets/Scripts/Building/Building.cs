@@ -24,4 +24,6 @@ public abstract class Building : MonoBehaviour {
     }
 
     public abstract void SetupBuilding();
+
+    public abstract void Select();
 }

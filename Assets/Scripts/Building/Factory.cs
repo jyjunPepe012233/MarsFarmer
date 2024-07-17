@@ -5,7 +5,7 @@ using UnityEngine;
 public class Factory : Building {
     
     [Header("Factory")]
-    [SerializeField] private float holdResourceAmount;
+    [SerializeField] private int holdResourceAmount;
     [Space(5)]
     [SerializeField] private float collectPerHour;
 
@@ -28,6 +28,13 @@ public class Factory : Building {
         
         SetCollect();
     }
+    
+    
+    public override void Select() {
+
+        if (holdResourceAmount > 0) GetResource();
+    }
+    
 
     private void SetCollect() {
         
@@ -42,22 +49,25 @@ public class Factory : Building {
 
     private void ColletBySleepTime(int sleepTime) {
 
-        holdResourceAmount = collectPerHour * sleepTime;
+        holdResourceAmount = (int)collectPerHour * sleepTime;
     }
-    
 
 
     private void GetResource() {
-
+        
         switch (_resourceType) {
             
             case (ResourceType.Rices):
+                GameManager.Instance.SaveData.Rices += holdResourceAmount;
+                Debug.Log(GameManager.Instance.SaveData.Rices);
                 break;
             
             case (ResourceType.Corns):
+                GameManager.Instance.SaveData.Corns += holdResourceAmount;
                 break;
             
             case (ResourceType.Potatoes):
+                GameManager.Instance.SaveData.Potatoes += holdResourceAmount;
                 break;
         }
     }

@@ -10,8 +10,8 @@ public class GameManager : Singleton<GameManager>
     private bool _sleepTimeFlag = false;
     private bool _saveLoadFlag = false;
 
-    private ItemStatus itemStatus;
-    private BuildingStatus buildingStatus;
+    [SerializeField] private ItemStatus itemStatus;
+    [SerializeField] private BuildingStatus buildingStatus;
     public BuildingsID buildingsID;
 
     public List<ItemStatus.ItemStat> ItemStatus {
