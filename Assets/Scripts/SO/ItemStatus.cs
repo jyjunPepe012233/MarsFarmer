@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(menuName = "Mars Farmer/Item Status", fileName = "Item Status", order = int.MinValue)]
 public class ItemStatus : ScriptableObject {
 
