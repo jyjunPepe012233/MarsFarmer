@@ -70,12 +70,72 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // void getWaterSound(int index)
-    // {
-    //     getChannelIndex = 0;
-    //     for (int i = 0; i < getChannelIndex;i++)
-    //     {
-    //         if()
-    //     }
-    // }
+    public void clickSound(int index)
+        /*
+         - IndexList
+         0 : 곡물창고 클릭 사운드
+         1 : 공장 클릭 사운드
+         2 : 농장클릭 사운드
+         3 : 물 생상소 클릭 사운드
+         4 : 물 저장소 클릭 사운드
+         5 : 공사중 건물 클릭 사운드
+         6 : 발전소 클릭 사운드
+         7 : 산소 생성기 클릭 사운드
+         8 : 산소 저장기 클릭 사운드
+         9 : 베이스 클릭 사운드1
+         11 : 전기 베터리 클릭 사운드
+         12 : 건설완료 사운드
+          */
+    
+    {
+        clickChannelIndex = 0;
+        for (int i = 0; i < clickChannel;i++)
+        {
+            if (!clickPlayers[i].isPlaying)
+            {
+                clickChannelIndex = i;
+                break;
+            } 
+            clickPlayers[getChannelIndex].clip = getClips[i];
+            clickPlayers[getChannelIndex].Play();
+        }
+    }
+    public void getSound(int index)
+        /*
+         - IndexList
+         0 : 곡물획득 사운드
+         1 : 물 획득 사운
+         2 : 물건 구매 사운드
+         4 : 바이오 에탄올 획득 사운드
+         5 : 산소 획득 사운드
+         6 : 전기 획득 사운드
+         7 ; 판매 사운드
+          */
+    
+    {
+        getChannelIndex = 0;
+        for (int i = 0; i < getChannel;i++)
+        {
+            if (!getPlayers[i].isPlaying)
+            {
+                getChannelIndex = i;
+                break;
+            } 
+            getPlayers[getChannelIndex].clip = getClips[i];
+            getPlayers[getChannelIndex].Play();
+        }
+    }
+    public void backSound(int index)
+        /*
+         - IndexList
+         0 : 마트 BGM
+         1 : 홈 화면 BGM
+          */
+    
+    {
+        
+        bgmPlayer.clip = getClips[index];
+        bgmPlayer.Play();
+        
+    }
 }
