@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         _saveData = DataManager.Instance.LoadJson<JsonData>();
-        UIManager.Instance.UserStatusUpdate();
+        UIUpdate();
         GetSleepTime();
     }
 
@@ -51,9 +51,18 @@ public class GameManager : Singleton<GameManager>
                 DateTime.ParseExact(_saveData.BuildingInfos[i].LastGetTime, "yyyy-MM-dd hh:mm:ss:tt", null);
             _saveData.BuildingInfos[i].SleepTime = (int)(lastGetTime - DateTime.Now).TotalSeconds;
         }
-
     }
 
+    private void UIUpdate()
+    {
+        if (_saveData.UserName == null)
+        {
+            return;
+        }
+        
+        UIManager.Instance.UserStatusUpdate();
+    }
+    
     private void OnApplicationFocus(bool hasFocus)
     {
         if (!hasFocus)
