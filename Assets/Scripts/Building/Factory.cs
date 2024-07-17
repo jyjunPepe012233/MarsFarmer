@@ -3,27 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Factory : Building {
-
+    
+    [Header("Factory")]
     [SerializeField] private float holdResourceAmount;
-    [Header("Status")]
-    [SerializeField] private float collectPerSecond;
-    [SerializeField] private float maxCollect;
+    [Space(5)]
+    [SerializeField] private float collectPerHour;
 
     [Space(10f)]
     [SerializeField] private ResourceType _resourceType;
 
 
 
+    public override void SetupBuilding() {
+
+        status = GameManager.Instance.BuildingStatus[_buildingIndex];
+
+
+        gameObject.name = status.name;
+        _size = status.size;
+        buildPrice = status.buildPrice;
+        buildMinute = status.buildMinute;
+        
+        _resourceType = status.itemTypes[0];
+        
+        SetCollect();
+    }
+
+    private void SetCollect() {
+        
+        foreach (ItemStatus.ItemStat stat in GameManager.Instance.ItemStatus) {
+            if (_resourceType == stat.type) {
+
+                collectPerHour = stat.collectAmountHour;
+                break;
+            }
+        }
+    }
+
     private void ColletBySleepTime(int sleepTime) {
 
-        holdResourceAmount = collectPerSecond * sleepTime;
-        holdResourceAmount = Mathf.Clamp(holdResourceAmount, 0, maxCollect);
+        holdResourceAmount = collectPerHour * sleepTime;
     }
+    
 
 
     private void GetResource() {
-        
-//        GameManager.Instance.자원 += 뭐시기
+
+        switch (_resourceType) {
+            
+            case (ResourceType.Rices):
+                break;
+            
+            case (ResourceType.Corns):
+                break;
+            
+            case (ResourceType.Potatoes):
+                break;
+        }
     }
     
 }

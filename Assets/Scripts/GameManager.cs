@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class GameManager : Singleton<GameManager> {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[SerializeField] private ItemStatus itemStatus;
+	[SerializeField] private BuildingStatus buildingStatus;
+
+	public List<ItemStatus.ItemStat> ItemStatus {
+		get => itemStatus.itemStatus;
+	}
+	public List<BuildingStatus.BuildingStat> BuildingStatus {
+		get => buildingStatus.buildingStats;
+	}
+}
+
+
+public enum ResourceType {
+	Oxygen,
+	Water,
+	Electricity,
+	Rices,
+	Corns,
+	Potatoes,
+	BioEthanol
 }
