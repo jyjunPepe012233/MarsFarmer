@@ -39,5 +39,5 @@ public class Storage : Building {
     }
     
     public override void Select() {}
-
+    
 }
