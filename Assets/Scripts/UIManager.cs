@@ -175,16 +175,12 @@ public class UIManager : Singleton<UIManager>
         _realBuyPopUp.SetActive(false);
     }
 
-    public void OnBuy(int itemIndex)
+    public void OnBuy()
     {
         _realBuyPopUp.SetActive(false);
-        if (itemIndex == 1)
-        {
-            Market.Instance.BuyBuilding(_buildingIndex);
-        }
     }
 
-    public void OnBuyBuildingy(int buildingIndex)
+    public void OnBuyBuilding(int buildingIndex)
     {
         _buildingIndex = buildingIndex;
         _realBuyPopUp.SetActive(true);
