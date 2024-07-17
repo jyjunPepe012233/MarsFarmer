@@ -42,16 +42,36 @@ public class GameManager : Singleton<GameManager>
         {
             return;
         }
-        
+
         for (int i = 0; i < _saveData.BuildingInfos.Count; i++)
         {
             DateTime lastGetTime =
                 DateTime.ParseExact(_saveData.BuildingInfos[i].LastGetTime, "yyyy-MM-dd hh:mm:ss:tt", null);
             _saveData.BuildingInfos[i].SleepTime = (int)(lastGetTime - DateTime.Now).TotalSeconds;
         }
-        
+
     }
 
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            DataManager.Instance.GetEditJson(_saveData);
+        }
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            DataManager.Instance.GetEditJson(_saveData);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        DataManager.Instance.GetEditJson(_saveData);
+    }
     
     public JsonData SaveData
     {
