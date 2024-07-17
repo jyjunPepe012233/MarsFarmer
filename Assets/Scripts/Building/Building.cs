@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,10 @@ public abstract class Building : MonoBehaviour {
     [SerializeField] protected int buildPrice;
     [SerializeField] protected int buildMinute;
 
+    private BoxCollider collider;
+    [SerializeField] private bool isCantPlace;
+    
+
     
     protected BuildingStatus.BuildingStat status;
     public BuildingStatus.BuildingStat Status {
@@ -23,7 +28,27 @@ public abstract class Building : MonoBehaviour {
         get => _size;
     }
 
+    void Awake() {
+
+        collider = GetComponent<BoxCollider>();
+    }
+
+    void Update() {
+
+        isCantPlace = MapManager.Instance.isCantPlace;
+        Debug.Log(1);
+    }
+
     public abstract void SetupBuilding();
 
     public abstract void Select();
+
+    
+    protected void OnTriggerEnter(Collider other) {
+        isCantPlace = false;
+    }
+
+    protected void OnTriggerExit(Collider other) {
+        isCantPlace = true;
+    }
 }

@@ -18,6 +18,8 @@ public class MapManager : Singleton<MapManager> {
     public Vector3? oldBuildingPos;
     public Vector3? newBuildingPos;
 
+    public bool isCantPlace;
+
     public GameObject PlacingObject {
         get => placingObject;
         set => placingObject = value;
@@ -77,9 +79,9 @@ public class MapManager : Singleton<MapManager> {
 
         if (placingObject == null) return;
         
-        if (oldBuildingPos == null) oldBuildingPos = placingObject.transform.position;
+        placingSign.SetActive(!isCantPlace);
         
-        placingSign.SetActive(true);
+        if (oldBuildingPos == null) oldBuildingPos = placingObject.transform.position;
 
         placingSign.GetComponent<RectTransform>().position =
             CameraManager.Instance.camData.WorldToScreenPoint(placingObject.transform.position);
@@ -121,7 +123,8 @@ public class MapManager : Singleton<MapManager> {
         newBuildingPos = null;
         if (oldBuildingPos != null) {
             placingObject.transform.position = (Vector3)oldBuildingPos;
-        } else placingObject.transform.position = Vector3.zero;
+        }
+        
         oldBuildingPos = null;
         placingObject = null;
         
