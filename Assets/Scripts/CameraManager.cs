@@ -57,7 +57,7 @@ public class CameraManager : MonoBehaviour {
 
 		Vector2 touchInput = Input.GetTouch(0).deltaPosition;
 
-		var addPos = (_camMoveDirx * new Vector3(touchInput.x, 0, touchInput.y)); 
+		var addPos = -(_camMoveDirx * new Vector3(touchInput.x, 0, touchInput.y)); 
 		var newPos = _camArm.position + addPos * Mathf.Lerp(_camMoveSpeed.x, _camMoveSpeed.y, _distanceIndex);
 
 		newPos.x = Mathf.Clamp(newPos.x, _minPosition.x, _maxPosition.x);
@@ -77,7 +77,7 @@ public class CameraManager : MonoBehaviour {
 		var oldDistance = Vector2.Distance(touch1.position - touch1.deltaPosition, touch2.position - touch2.deltaPosition);
 		var curDistance = Vector2.Distance(touch1.position, touch2.position);
 
-		_distanceIndex += oldDistance - curDistance * _zoomSpeed;
+		_distanceIndex += (oldDistance - curDistance) * _zoomSpeed;
 	}
 
 
