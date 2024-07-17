@@ -72,6 +72,11 @@ public class MapManager : Singleton<MapManager> {
         }
         
         if (isMapping) Mapping();
+
+        isCantPlace = false;
+    }
+
+    void Update() {
     }
 
 
@@ -80,6 +85,7 @@ public class MapManager : Singleton<MapManager> {
         if (placingObject == null) return;
         
         placingSign.SetActive(!isCantPlace);
+
         
         if (oldBuildingPos == null) oldBuildingPos = placingObject.transform.position;
 
@@ -88,6 +94,7 @@ public class MapManager : Singleton<MapManager> {
 
         
         
+        Debug.Log(isCantPlace);
         if (Input.touchCount == 1) {
             
             Touch touch = Input.GetTouch(0);
@@ -101,10 +108,8 @@ public class MapManager : Singleton<MapManager> {
                 
                 placingObject.transform.position = (Vector3)newBuildingPos;
             }
-
-
+            
         }
-
     }
 
     public void ChoiceYes() {
