@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "MarsFarmer/Buildings ID", fileName = "Buildings ID", order = int.MinValue)]
+[CreateAssetMenu(menuName = "Mars Farmer/Buildings ID", fileName = "Buildings ID", order = int.MaxValue)]
 public class BuildingsID : ScriptableObject {
 
 	[System.Serializable]
