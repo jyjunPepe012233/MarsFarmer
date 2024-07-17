@@ -12,6 +12,12 @@ public class MapManager : Singleton<MapManager> {
     [SerializeField] private BuildingsID buildingsIdData;
 
     public bool isMapping;
+    [SerializeField] private GameObject placingObject;
+    [SerializeField] private GameObject placingSign;
+
+    public GameObject PlacingObject {
+        set => placingObject = value;
+    }
     
     
     
@@ -34,29 +40,46 @@ public class MapManager : Singleton<MapManager> {
     }
 
     public void EnterMapping() {
-        
-        // UI 제거
 
         isMapping = true;
 
     }
 
     void EndMapping() {
-        
-        // UI 키기
 
+        UIManager.Instance.ExitMapping();
+        
         isMapping = false;
-    }
-
-    public void BuildingPlace(GameObject placingObject) {
-        
-        
     }
     
     
     
     void Update() {
 
-        if (isMapping && Input.GetKeyDown(KeyCode.Escape)) EndMapping();
+        if (isMapping && Input.GetKeyDown(KeyCode.Escape)) { // 뒤로가기
+            EndMapping();
+        }
+        
+        if (isMapping) Mapping();
+    }
+
+
+    void Mapping() {
+
+        if (placingObject == null) return;
+
+        var sign = Instantiate(placingSign);
+        sign.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(placingObject.transform.position);
+    }
+
+    public void ChoiceYes() {
+        
+        EndChoice();
+    }
+
+    public void EndChoice() {
+
+        placingObject = null;
+        Destroy(placingSign);
     }
 }

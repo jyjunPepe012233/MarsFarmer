@@ -18,18 +18,19 @@ public class TouchSystem : MonoBehaviour {
 			if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) {
 
 				var obj = hitInfo.transform.gameObject;
+				
+				if (obj.tag != "Building") return;
 
 				if (MapManager.Instance.isMapping) {
-					MapManager.Instance.BuildingPlace(obj);
+					MapManager.Instance.PlacingObject = obj;
 					return;
 				}
 
-				switch (obj.tag) {
-					
-					case ("Factory"):
-						obj.GetComponent<Factory>().Select();
-						break;
+				if (obj.GetComponent<Factory>() != null) {
+					obj.GetComponent<Factory>().Select();
+					return;
 				}
+				
 			}
 		}
 	}
