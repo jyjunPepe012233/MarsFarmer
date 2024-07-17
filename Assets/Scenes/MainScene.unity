@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a775b52b1cf4314cadba200f7d590be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingsID: {fileID: 0}
   sleepTime: 0
 --- !u!4 &122216344
 Transform:
@@ -337,6 +338,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247566898}
   m_CullTransparentMesh: 1
+--- !u!1 &603755667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 603755669}
+  - component: {fileID: 603755668}
+  m_Layer: 0
+  m_Name: "\uBC14\uC774\uC624\uC5D0\uD0C4\uC62C \uACF5\uC7A5"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &603755668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603755667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbec96d022d674ba58f6506fc2943238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingIndex: 4
+  _size: {x: 3, y: 3}
+  buildPrice: 120000
+  buildMinute: 1440
+  holdResourceAmount: 0
+  collectPerHour: 0.2
+  _resourceType: 6
+--- !u!4 &603755669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603755667}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.21718, y: 0.38790804, z: 16.418438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &834963562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,3 +1237,4 @@ SceneRoots:
   - {fileID: 834963564}
   - {fileID: 1917085361}
   - {fileID: 1436310658}
+  - {fileID: 603755669}

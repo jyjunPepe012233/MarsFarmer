@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour {
+public abstract class Building : MonoBehaviour {
 
-    [SerializeField] protected string _showName;
+    [SerializeField] protected int _buildingIndex;
+    
+    [Space(5f)]
     [SerializeField] protected Vector2 _size;
     
-    protected enum ResourceType {
-        Oxygen,
-        Water,
-        Electricity,
-        Rices,
-        Corns,
-        Potatoes
+    [Space(5f)]
+    [SerializeField] protected int buildPrice;
+    [SerializeField] protected int buildMinute;
+
+    
+    protected BuildingStatus.BuildingStat status;
+    public BuildingStatus.BuildingStat Status {
+        get => status;
     }
 
-    public string showName {
-        get => _showName;
-    }
     public Vector2 Size {
         get => _size;
     }
+
+    public abstract void SetupBuilding();
 }

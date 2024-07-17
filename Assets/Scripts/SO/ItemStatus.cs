@@ -14,3 +14,13 @@ public class ItemStatus : ScriptableObject {
 	}
 	public List<ItemStat> itemStatus;
 }
+
+public enum ResourceType {
+	Oxygen,
+	Water,
+	Electricity,
+	Rices,
+	Corns,
+	Potatoes,
+	BioEthanol
+}
