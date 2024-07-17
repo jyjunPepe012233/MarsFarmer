@@ -34,6 +34,8 @@ public class UIManager : Singleton<UIManager>
     private TextMeshProUGUI _dollarsText;
     [SerializeField]
     private TextMeshProUGUI _rubysText;
+
+    private int _buildingIndex;
     
     protected override void Init()
     {
@@ -173,8 +175,19 @@ public class UIManager : Singleton<UIManager>
         _realBuyPopUp.SetActive(false);
     }
 
-    public void OnBuy()
+    public void OnBuy(int itemIndex)
     {
         _realBuyPopUp.SetActive(false);
+        if (itemIndex == 1)
+        {
+            Market.Instance.BuyBuilding(_buildingIndex);
+        }
     }
+
+    public void OnBuyBuildingy(int buildingIndex)
+    {
+        _buildingIndex = buildingIndex;
+        _realBuyPopUp.SetActive(true);
+    }
+
 }

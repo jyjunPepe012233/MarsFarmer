@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     private JsonData _saveData;
+    
     private bool _sleepTimeFlag = false;
     private bool _saveLoadFlag = false;
 
@@ -64,7 +66,15 @@ public class GameManager : Singleton<GameManager>
         
         UIManager.Instance.UserStatusUpdate();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _saveData.Dollars = 999999;
+        }
+    }
+
     private void OnApplicationFocus(bool hasFocus)
     {
         if (!hasFocus)
