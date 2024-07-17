@@ -1,51 +1,81 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class SoundManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public AudioClip homeBGM;
-    public AudioClip marketBGM;
-    [Header("get")]
-    public AudioClip getWater;
-    public AudioClip getGrain;
-    public AudioClip getVoltage;
-    public AudioClip getAir;
-    public AudioClip getEthanol;
-    [Header("click")]
-    public AudioClip clickWaterStorage;
-    public AudioClip clickGrainStorage;
-    public AudioClip clickVoltageStorage;
-    public AudioClip clickAirStorage;
-    public AudioClip clickEthanolStorage;
-    public AudioClip clickMarket;
-    public AudioClip clickBase1;
-    public AudioClip clickBase2;
-    public AudioClip clickWaterProduction;
-    public AudioClip clickGrainProduction;
-    public AudioClip clickVoltageProduction;
-    public AudioClip clickAirProduction;
-    public AudioClip clickEthanolProduction;
-    [Header("gita")]
-    public AudioClip buy;
-    public AudioClip sell;
-    public AudioClip marketIn;
-    public AudioClip marketOut;
-    public AudioClip constructionStart;
-    public AudioClip clickConstruction;
-    public AudioClip constructionEnd;
+    public static SoundManager instance;
 
-
+    public int thisFiled;
     
-    void Start()
+    [Header("#BGM")]
+    public AudioClip[] bgmClips;
+    public float bgmVolume;
+    private AudioSource bgmPlayer;
+
+    [Header("#Click")]
+    public AudioClip[] clickClips;
+    public float clickVolume;
+    public int clickChannel;
+    private AudioSource[] clickPlayers;
+    private int clickChannelIndex;
+
+    [Header("#Get")]
+    public AudioClip[] getClips;
+    public float getVolume;
+    public int getChannel;
+    private AudioSource[] getPlayers;
+    private int getChannelIndex;
+    
+    private void Awake()
     {
-        
+        instance = this;
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Init()
     {
+        GameObject bgmObject = new GameObject("bgmPlayer");
+        bgmObject.transform.parent = transform;
+        bgmPlayer = bgmObject.AddComponent <AudioSource>();
+        bgmPlayer.playOnAwake = false;
+        bgmPlayer.loop = true;
+        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.clip = bgmClips[thisFiled];
+
         
+        GameObject clickObject = new GameObject("clickPlayer"); 
+        clickObject.transform.parent = transform;
+        clickPlayers = new AudioSource[clickChannel];
+        for (int i = 0; i < clickChannel; i++)
+        {
+            clickPlayers[i] = clickObject.AddComponent<AudioSource>();
+            clickPlayers[i].volume = clickVolume;
+            clickPlayers[i].playOnAwake = false;
+            clickPlayers[i].loop = false;
+        }
+
+        GameObject getObject = new GameObject("getPlayer");
+        getObject.transform.parent = transform;
+        getPlayers = new AudioSource[getChannel];
+        for (int i = 0; i < getChannel; i++)
+        {
+            getPlayers[i] = getObject.AddComponent<AudioSource>();
+            getPlayers[i].loop = false;
+            getPlayers[i].volume = getVolume;
+            getPlayers[i].playOnAwake = false;
+        }
     }
+
+    // void getWaterSound(int index)
+    // {
+    //     getChannelIndex = 0;
+    //     for (int i = 0; i < getChannelIndex;i++)
+    //     {
+    //         if()
+    //     }
+    // }
 }
