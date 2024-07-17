@@ -123,4 +123,9 @@ public class UIManager : Singleton<UIManager>
     {
         Debug.Log("Gotcha Join Click");
     }
+
+    public void OverDollar()
+    {
+        Debug.Log("Dollar Over");
+    }
 }
