@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,6 +8,9 @@ public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
     private GameObject _homeUI;
+
+    [SerializeField]
+    private GameObject _mappingUI;
     
     [SerializeField]
     private TextMeshProUGUI _userNameText;
@@ -22,6 +26,13 @@ public class UIManager : Singleton<UIManager>
         
     }
 
+    public void UIInit()
+    {
+        _homeUI.SetActive(true);
+        _mappingUI.SetActive(false);
+        
+    }
+    
     public void UserStatusUpdate()
     {
         _userNameText.text = GameManager.Instance.SaveData.UserName;
@@ -39,6 +50,8 @@ public class UIManager : Singleton<UIManager>
     {
         Debug.Log("Mapping Click");
         _homeUI.SetActive(false);
+        _mappingUI.SetActive(true);
+        
         MapManager.Instance.EnterMapping();
     }
 
@@ -46,6 +59,7 @@ public class UIManager : Singleton<UIManager>
     {
         Debug.Log("Mapping Exit");
         _homeUI.SetActive(true);
+        _mappingUI.SetActive(false);
     }
 
     public void OnClickProductList()
