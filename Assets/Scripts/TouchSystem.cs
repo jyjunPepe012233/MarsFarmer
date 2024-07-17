@@ -5,7 +5,7 @@ using UnityEngine;
 public class TouchSystem : MonoBehaviour {
 
 	void Update() {
-
+		
 		if (Input.touchCount == 1) TouchRayCast();
 	}
 
@@ -18,6 +18,11 @@ public class TouchSystem : MonoBehaviour {
 			if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity)) {
 
 				var obj = hitInfo.transform.gameObject;
+
+				if (MapManager.Instance.isMapping) {
+					MapManager.Instance.BuildingPlace(obj);
+					return;
+				}
 
 				switch (obj.tag) {
 					

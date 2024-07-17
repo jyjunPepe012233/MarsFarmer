@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Factory : Building {
@@ -32,7 +33,7 @@ public class Factory : Building {
     
     public override void Select() {
 
-        if (holdResourceAmount > 0) GetResource();
+        if (holdResourceAmount > 0) UIManager.Instance.OnClickBuilding();
     }
     
 

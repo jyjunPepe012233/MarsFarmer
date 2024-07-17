@@ -10,6 +10,8 @@ public class MapManager : Singleton<MapManager> {
 
     [Space(10)]
     [SerializeField] private BuildingsID buildingsIdData;
+
+    public bool isMapping;
     
     
     
@@ -31,12 +33,22 @@ public class MapManager : Singleton<MapManager> {
         }
     }
 
-    void EnterMapping() {
+    public void EnterMapping() {
         
-        
+        // UI 제거
+
+        isMapping = true;
+
     }
 
     void EndMapping() {
+        
+        // UI 키기
+
+        isMapping = false;
+    }
+
+    public void BuildingPlace(GameObject placingObject) {
         
         
     }
@@ -44,7 +56,7 @@ public class MapManager : Singleton<MapManager> {
     
     
     void Update() {
-        
-//        if ()
+
+        if (isMapping && Input.GetKeyDown(KeyCode.Escape)) EndMapping();
     }
 }
