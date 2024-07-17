@@ -7,6 +7,9 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
+    private Canvas _canvas;
+    
+    [SerializeField]
     private GameObject _homeUI;
 
     [SerializeField]
