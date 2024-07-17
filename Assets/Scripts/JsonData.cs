@@ -70,7 +70,8 @@ public class JsonData
     private string _userName;
     private int _userLevel;
 
-    private float _dollars;
+    private int _dollars;
+    private int _rubys;
     private List<BuildingInfo> _buildingInfos;
     private string[] _workers;
     
@@ -86,12 +87,13 @@ public class JsonData
 
     public JsonData() { }
 
-    public JsonData(string userName, int userLevel, float dollars,  List<BuildingInfo> buildingInfos, string[] workers, float oxygen,
+    public JsonData(string userName, int userLevel, int dollars, int rubys,  List<BuildingInfo> buildingInfos, string[] workers, float oxygen,
         float water, float electricity, int rices, int corns, int potatoes, string lastPlayTime)
     {
         _userName = userName;
         _userLevel = userLevel;
         _dollars = dollars;
+        _rubys = rubys;
         _buildingInfos = buildingInfos;
         _workers = workers;
         _oxygen = oxygen;
@@ -115,10 +117,16 @@ public class JsonData
         set { _userLevel = value; }
     }
 
-    public float Dollars
+    public int Dollars
     {
         get { return _dollars; }
-        set { _dollars = (float)Math.Floor(value * 100) / 100; }
+        set { _dollars = value; }
+    }
+
+    public int Rubys
+    {
+        get { return _rubys; }
+        set { _rubys = value; }
     }
 
     public List<BuildingInfo> BuildingInfos
