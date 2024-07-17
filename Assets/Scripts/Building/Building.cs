@@ -14,8 +14,7 @@ public abstract class Building : MonoBehaviour {
     [SerializeField] protected int buildPrice;
     [SerializeField] protected int buildMinute;
 
-    private BoxCollider collider;
-    [SerializeField] private bool isCantPlace;
+    [SerializeField] protected bool isCantPlace;
     
 
     
@@ -28,15 +27,11 @@ public abstract class Building : MonoBehaviour {
         get => _size;
     }
 
-    void Awake() {
 
-        collider = GetComponent<BoxCollider>();
-    }
-
-    void Update() {
-
-        isCantPlace = MapManager.Instance.isCantPlace;
-        Debug.Log(1);
+    
+    void FixedUpdate() {
+        if (!MapManager.Instance.isCantPlace) MapManager.Instance.isCantPlace = isCantPlace;
+        isCantPlace = false;
     }
 
     public abstract void SetupBuilding();
@@ -44,11 +39,8 @@ public abstract class Building : MonoBehaviour {
     public abstract void Select();
 
     
-    protected void OnTriggerEnter(Collider other) {
-        isCantPlace = false;
-    }
-
-    protected void OnTriggerExit(Collider other) {
+    
+    private void OnTriggerStay(Collider other) {
         isCantPlace = true;
     }
 }

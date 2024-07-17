@@ -40,4 +40,11 @@ public class Storage : Building {
     
     public override void Select() {}
     
+//    private void OnTriggerEnter(Collider other) {
+//        isCantPlace = true;
+//    }
+//    
+//    private void OnTriggerExit(Collider other) {
+//        isCantPlace = false;
+//    }
 }

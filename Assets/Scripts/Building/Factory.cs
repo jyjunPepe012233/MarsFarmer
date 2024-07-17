@@ -74,4 +74,8 @@ public class Factory : Building {
         }
     }
     
+//    private void OnTriggerEnter(Collider other) {
+//        isCantPlace = true;
+//    }
+    
 }
