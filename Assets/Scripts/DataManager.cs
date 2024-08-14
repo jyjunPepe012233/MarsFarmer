@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    private string SavePath()
     {
-        
+        return Application.dataPath + "/SaveData.json";
     }
 
-    // Update is called once per frame
-    void Update()
+    private void EditJson(JsonData jsonData)
     {
-        
+        string saveData = JsonUtility.ToJson(jsonData, true);
+        File.WriteAllText(SavePath(), saveData, Encoding.UTF8);
+    }
+
+    public JsonData LoadJson<JsonData>()
+    {
+        string jsonData = File.ReadAllText(SavePath(), Encoding.UTF8);
+        return JsonUtility.FromJson<JsonData>(jsonData);
+    }
+
+    public void GetEditJson(JsonData jsonData)
+    {
+        EditJson(jsonData);
     }
 }
