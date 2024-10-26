@@ -4,5 +4,4 @@
 마스 파머mars farmer는 1학년 1학기 때 진행된 1박 3일 해커톤에서 만들어졌습니다.  
 <br>
 <br>
-2학년 클라이언트 1인, 1학년 클라이언트 2인, 모델러 1인으로 구성된 팀이었고,<br>
-저는 Building과 MapManager 등을 구성하여 작품을 제작하는 데에 많은 기여를 했습니다.
+https://www.youtube.com/watch?v=NiMgurhP81I
